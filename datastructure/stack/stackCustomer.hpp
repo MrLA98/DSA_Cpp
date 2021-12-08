@@ -1,21 +1,17 @@
-#include "queue.hpp"
+#include "stack.hpp"
 
-void qCustomerInterface(int key){
-    QueueF *queue;
-    if(key == 2){
-        cout<<"[linked list queue] -- test:"<<endl;
-        queue = new QueueList();
+void sCustomerInterface(int key){
+    StackF *stack;
+    if(key == 1){
+        cout<<"[linked list stack] -- test:"<<endl;
+        stack = new ListStack();
     }else{
         cout<<"$ input the maxSize:";
         int maxSize = 0;
         cin >> maxSize;
         if(key == 0) {
-            queue = new QueueArray(maxSize);
-            cout<<"[linear array queue] -- test:"<<endl;
-        }
-        else {
-            queue = new QueueCircle(maxSize);
-            cout<<"[cicle array queue] -- test:"<<endl;
+            stack = new ArrayStack(maxSize);
+            cout<<"[linear array stack] -- test:"<<endl;
         }
     }
     while(1){
@@ -23,7 +19,8 @@ void qCustomerInterface(int key){
         cout<<"-------------Menu-------------"<<endl;
         cout<<"----a(add)----add a number----"<<endl;
         cout<<"----p(pop)----pop a number----"<<endl;
-        cout<<"----l(len)---length of queue--"<<endl;
+        cout<<"----l(len)---length of stack--"<<endl;
+        cout<<"----t(top)----top of stack----"<<endl;
         cout<<"----s(show)---show the queue--"<<endl;
         cout<<"----e(exit)---exit program----"<<endl;
         cout<<"$ input a char to choose:";
@@ -35,22 +32,31 @@ void qCustomerInterface(int key){
             {cout<<"$ input a number:";
             int num = 0;
             cin >> num;
-            queue->push(num);
+            stack->push(num);
             break;}
         case 'p':
             try{
-                int num = queue->pop();
-                cout << "# pop a number:"<< num << endl;
+                int num = stack->pop();
+                cout << "# pop a number: "<< num << endl;
             }
             catch(const runtime_error err){
                 cerr << err.what() << endl;
             }
             break;
         case 'l':
-            cout << "# length of queue: " << queue->length() << endl;
+            cout << "# length of stack: " << stack->size() << endl;
+            break;
+        case 't':
+            try{
+                int num = stack->peek();
+                cout << "# top number: "<< num << endl;
+            }
+            catch(const runtime_error err){
+                cerr << err.what() << endl;
+            }
             break;
         case 's':
-            queue->show();
+            stack->show();
             break;
         case 'e':
             cout << "# exit program" << endl;

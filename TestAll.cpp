@@ -2,6 +2,7 @@
 #include "datastructure/sparsearray/sparseArray.hpp" // 1.1 稀疏数组测试
 #include "datastructure/queue/qCustomer.hpp" // 1.2 队列测试
 #include "datastructure/linkedlist/listCustomer.hpp" // 1.3 链表测试
+#include "datastructure/stack/stackCustomer.hpp" // 1.4 栈测试
 
 // 算法测试案例
 #include "algorithm/sort/sortChecker.hpp" // 2.1 排序算法测试
@@ -11,12 +12,13 @@ using namespace std;
 void sparseTest();
 void queueTest();
 void listTest();
+void stackTest();
 
 void sortTest();
 
 int main(){
     // TODO: testfunction
-    listTest();
+    stackTest();
     return 0;
 }
 
@@ -59,6 +61,17 @@ void listTest(){
     cout<<"$ input number[0/1/2/3/4/5] to test: ";
     cin >> key;
     lCustomerInterface(key);
+}
+
+// 1.4 队列测试
+void stackTest(){
+    int key = 0;
+    cout<<"-------------Menu------------"<<endl;
+    cout<<"----0--linear array stack----"<<endl;
+    cout<<"----1---linked list stack----"<<endl;
+    cout<<"$ input number[0/1] to test:";
+    cin >> key;
+    sCustomerInterface(key);
 }
 
 // 2.1 排序算法测试
