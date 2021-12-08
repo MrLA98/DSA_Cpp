@@ -7,6 +7,7 @@ public:
     virtual int pop() = 0;
     virtual int length() = 0;
     virtual void show() = 0;
+    //virtual ~QueueF() = 0;
 };
 
 // 数组队列 -- 一次性的

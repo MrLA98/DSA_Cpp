@@ -1,7 +1,7 @@
 #include "queue.hpp"
 using namespace std;
 
-void CustomerInterface(int key){
+void qCustomerInterface(int key){
     QueueF *queue;
     if(key == 2){
         cout<<"[linked list queue] -- test:"<<endl;
@@ -21,7 +21,7 @@ void CustomerInterface(int key){
     }
     while(1){
         cout<<endl;
-        cout<<"-------------Menu------------"<<endl;
+        cout<<"-------------Menu-------------"<<endl;
         cout<<"----a(add)----add a number----"<<endl;
         cout<<"----p(pop)----pop a number----"<<endl;
         cout<<"----l(len)---length of queue--"<<endl;
@@ -55,6 +55,7 @@ void CustomerInterface(int key){
             break;
         case 'e':
             cout << "# exit program" << endl;
+            //delete queue;
             return; 
         default:
             break;
