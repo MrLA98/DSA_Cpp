@@ -3,6 +3,7 @@
 #include "datastructure/queue/qCustomer.hpp" // 1.2 队列测试
 #include "datastructure/linkedlist/listCustomer.hpp" // 1.3 链表测试
 #include "datastructure/stack/stackCustomer.hpp" // 1.4 栈测试
+#include "datastructure/hash/hashCustomer.hpp" // 1.5 哈希表测试
 
 // 算法测试案例
 #include "algorithm/sort/sortChecker.hpp" // 2.1 排序算法测试
@@ -13,12 +14,13 @@ void sparseTest();
 void queueTest();
 void listTest();
 void stackTest();
+void hashTest();
 
 void sortTest();
 
 int main(){
     // TODO: testfunction
-    stackTest();
+    hashTest();
     return 0;
 }
 
@@ -73,6 +75,11 @@ void stackTest(){
     cout<<"$ input number[0/1/2] to test:";
     cin >> key;
     sCustomerInterface(key);
+}
+
+// 1.5 哈希表测试
+void hashTest(){
+    hCustomerInterface();
 }
 
 // 2.1 排序算法测试
