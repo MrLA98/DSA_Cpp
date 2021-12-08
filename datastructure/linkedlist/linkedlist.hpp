@@ -373,3 +373,75 @@ class DoubleOrderedList : public DoubleListF{
         cout << "# not found!\n";
     }
 };
+
+// 循环链表 -- 单纯为了解决约瑟夫问题
+class Cnode{
+public:
+    int data;
+    Cnode* next;
+    Cnode(int data){
+        this->data = data;
+        next = nullptr;
+    }
+};
+
+class CircleList{
+public: 
+    Cnode* head;
+    int length;
+    CircleList(int i){
+        length = i;
+        head = new Cnode(1);
+        Cnode* cur = head;
+        for(int j = 2; j <= i; ++j){
+            cur->next = new Cnode(j);
+            cur = cur->next;
+        }
+        cur->next = head;
+    }
+
+    void show(Cnode* node){
+        Cnode* cur = node;
+        cout<<"[ ";
+        for(int i = 0; i < length; ++i){
+            cout << cur->data <<" ";
+            cur = cur->next;
+        }
+        cout<<"]\n";
+    }
+
+    void Joseph(int begin, int steps){
+        Cnode* cur = head;
+        if(begin > length){
+            cout << "begin pos is not exist!";
+            return;
+        }
+        while(begin > 1){ // 到达第n个
+            cur = cur->next;
+            --begin;
+        }
+        if(steps == 1){
+            show(cur);
+            return;
+        }
+        while(length > 1){
+            cur = getTarPre(cur, steps);
+            Cnode *temp = cur->next;
+            cout << " -pop [" << temp->data <<"];\n";
+            cur->next = temp->next;
+            cur = cur->next;
+            delete temp;
+            --length;
+        }
+        cout << " -pop [" << cur->data <<"]\n# finished~\n";
+    }
+
+    Cnode* getTarPre(Cnode* beg, int target){
+        Cnode* cur = beg;
+        while(target > 2){
+            cur = cur->next;
+            --target;
+        }
+        return cur;
+    }
+};

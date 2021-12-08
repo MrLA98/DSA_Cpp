@@ -54,7 +54,9 @@ void listTest(){
     cout<<"----1--single ordered list---"<<endl;
     cout<<"----2--double linked list----"<<endl;
     cout<<"----3--double ordered list---"<<endl;
-    cout<<"$ input number[0/1/2/3] to test:";
+    cout<<"----4--list function test----"<<endl;
+    cout<<"----5--Joseph problem test---"<<endl;
+    cout<<"$ input number[0/1/2/3/4/5] to test: ";
     cin >> key;
     lCustomerInterface(key);
 }
