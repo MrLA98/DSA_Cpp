@@ -67,9 +67,10 @@ void listTest(){
 void stackTest(){
     int key = 0;
     cout<<"-------------Menu------------"<<endl;
-    cout<<"----0--linear array stack----"<<endl;
+    cout<<"----0---linear array stack---"<<endl;
     cout<<"----1---linked list stack----"<<endl;
-    cout<<"$ input number[0/1] to test:";
+    cout<<"----2---stack calculator-----"<<endl;
+    cout<<"$ input number[0/1/2] to test:";
     cin >> key;
     sCustomerInterface(key);
 }
