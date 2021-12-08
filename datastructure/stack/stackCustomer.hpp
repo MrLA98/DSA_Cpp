@@ -85,21 +85,33 @@ bool isSimbol(char ch){
             ch == '*' || ch == '/';
 }
 
+bool isSimbol(string s){
+    if(s.size() == 1 && isSimbol(s[0])){
+        return true;
+    }
+    return false;
+}
+
+int priority(string s){
+    if(s == "*" || s == "/") return 2;
+    if(s == "+" || s == "-") return 1;
+    return 0;
+}
+
 // 字符串 -> 字符数组
 vector<string> getChar(string s){
     vector<string> exp;
     string temp = "";
     for(auto it : s){
-        if(it != '_' && !isSimbol(it)){
+        if(!isSimbol(it)){ // 数字
             temp += it;
         }
-        else{ // it是字符或空格
+        else{ // it是字符
             if(temp.size()!=0){ // 此时将数字加入到表达式
                 exp.push_back(temp);
             }
-            if(it != '_'){ // 不是空格，说明是符号，符号插入表达式
-                exp.push_back(string(1,it));
-            }
+            // 符号插入表达式
+            exp.push_back(string(1,it));
             temp = ""; // temp置空
         }
     }
@@ -110,8 +122,43 @@ vector<string> getChar(string s){
 
 // 中缀表达式转后缀表达式
 vector<string> mid2infix(vector<string>& mid){
-    vector<string> infix = mid;
-
+    vector<string> infix; // 结果数组
+    stack<string> operStack; // 符号栈
+    // 遍历中缀表达式
+    for(auto it : mid){
+        if(!isSimbol(it)){ // 数字直接输出
+            infix.push_back(it);
+        }
+        // 下面都是对符号的处理
+        else if(it == ")"){ // 1.右括号，不停弹栈，直到遇到左括号
+            while(operStack.top() != "("){
+                infix.push_back(operStack.top());
+                operStack.pop();
+            }
+            operStack.pop(); // 左括号也弹出 -- 左右括号抵消
+        }else if(operStack.empty() // 2.栈空
+              || it == "(" // 3.左括号
+              || operStack.top() == "(" // 4.栈顶是左括号
+              || priority(it) > priority(operStack.top()) // 5.新符号比栈顶符号优先
+        ) {
+            operStack.push(it); // 该符号直接入栈
+        } 
+        // 6.新符号优先级较低
+        else {
+            // 只要栈没空 且 栈顶符号优先级更高
+            while(!operStack.empty() && priority(it) <= priority(operStack.top())){
+                // 不停将栈顶元素弹出到结果数组中
+                infix.push_back(operStack.top());
+                operStack.pop();
+            }
+            operStack.push(it); // 再将该符号放入
+        }
+    }
+    // 栈里剩下的依次弹出
+    while(!operStack.empty()){
+        infix.push_back(operStack.top());
+        operStack.pop();
+    }
     return infix;
 }
 
