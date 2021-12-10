@@ -9,6 +9,7 @@
 // 算法测试案例
 #include "algorithm/sort/sortChecker.hpp" // 2.1 排序算法测试
 #include "algorithm/special/kmp/kmp.hpp" // 2.5.1 kmp算法
+#include "algorithm/special/divideconquer/hannoiTower.hpp" // 2.5.2 汉诺塔
 
 using namespace std;
 
@@ -21,10 +22,11 @@ void treeTest();
 
 void sortTest();
 void kmpTest();
+void hannoiTowerTest();
 
 int main(){
     // TODO: testfunction
-    kmpTest();
+    hannoiTowerTest();
     return 0;
 }
 
@@ -125,4 +127,13 @@ void kmpTest(){
     cout << "# find in position [" << pos <<"]:\n";
     cout <<"[" << sentence <<"]\n";
     cout <<"["<<string(pos,'_')<<word<<string(sentence.size()-word.size()-pos,'_')<<"]\n";
+}
+
+// 2.5.2 汉诺塔算法测试
+void hannoiTowerTest(){
+    cout << "$ input number of HanniTower: ";
+    int num;
+    cin >> num;
+    cout << "# here is the solution:\n";
+    hannoiTowerSolution(num, 'L', 'M', 'R');
 }
