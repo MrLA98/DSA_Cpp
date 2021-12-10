@@ -1,5 +1,6 @@
 #include "arrayHeap.hpp"
 #include "avltree.hpp"
+#include "huffmanTree.hpp"
 
 void binaryTreeTest(){
     TNode* node1 = new TNode(2, "lh");
@@ -132,6 +133,73 @@ void avlTreeMenu(){
     }
 }
 
+// 字符串转词频数组
+deque<fNode*> countWords(string s){
+    unordered_map<char,int> bucket;
+    for(auto ch : s){
+        ++bucket[ch];
+    }
+    deque<fNode*> res;
+    for(auto it : bucket){
+        res.push_back(new fNode(it.second, it.first));
+    }
+    return res;
+}
+
+string huffmanZip(string s, unordered_map<char, string> hufftable){
+    string res;
+    for(auto ch : s){
+        res += hufftable[ch];
+    }
+    return res;
+}
+
+string decode(string zipCode, unordered_map<char, string> hufftable){
+    unordered_map<string, char> revHufftable;
+    int max = 0;
+    for(auto it : hufftable){
+        revHufftable[it.second] = it.first;
+        max = it.second.size() > max ? it.second.size() : max;
+    }
+    int i = 0, j = 1;
+    string origin;
+    while(i + j <= zipCode.size()){
+        string key = zipCode.substr(i,j);
+        if(revHufftable.find(key) != revHufftable.end()){
+            origin += revHufftable[key];
+            i += j;
+            j = 1;
+        }else if(j < max){
+            ++j;
+        }else{
+            ++i;
+            j = 1;
+        }
+    }
+    return origin;
+}
+
+void huffmanTreeTest(){
+    while(1){
+        string s;
+        cout <<"$ input any sentences:\n";
+        cin >> s;
+        deque<fNode*> countW = countWords(s);
+        Huffman hTree(countW);
+        unordered_map<char, string> huffmanTable;
+        hTree.getHuffTable(huffmanTable);
+        string zipCode = huffmanZip(s, huffmanTable);
+        cout <<"# huffman zip code :\n ["<<zipCode<<"]\n";
+        cout <<"# revocer sentence:\n";
+        cout <<" [" << decode(zipCode,huffmanTable) << "]\n";
+
+        cout << "$ stop? [y/n] :";
+        char stop = 'y';
+        cin >> stop;
+        if(stop == 'y') return;
+    }
+}
+
 void tCustomerInterface(int key){
     if(key == 0){
         cout << "[binary tree] -- test:\n";
@@ -147,5 +215,9 @@ void tCustomerInterface(int key){
         cout << "[AVL tree] -- test:\n";
         avlTreeMenu();
         return;
+    }
+    if(key == 3){
+        cout << "[Huffman tree] -- test\n";
+        huffmanTreeTest();
     }
 }

@@ -91,7 +91,8 @@ void treeTest(){
     cout<<"----0------binary tree-------"<<endl;
     cout<<"----1------array heap--------"<<endl;
     cout<<"----2-------AVL tree---------"<<endl;
-    cout<<"$ input number[0/1/2] to test: ";
+    cout<<"----3-----Huffman tree-------"<<endl;
+    cout<<"$ input number[0/1/2/3] to test: ";
     cin >> key;
     tCustomerInterface(key);
 }
