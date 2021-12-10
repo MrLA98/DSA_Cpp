@@ -90,7 +90,8 @@ void treeTest(){
     cout<<"-------------Menu------------"<<endl;
     cout<<"----0------binary tree-------"<<endl;
     cout<<"----1------array heap--------"<<endl;
-    cout<<"$ input number[0/1] to test: ";
+    cout<<"----2-------AVL tree---------"<<endl;
+    cout<<"$ input number[0/1/2] to test: ";
     cin >> key;
     tCustomerInterface(key);
 }

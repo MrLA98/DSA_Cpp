@@ -18,13 +18,6 @@ public:
         left = right = nullptr;
     }
 
-    TNode(TNode* node){
-        val = node->val;
-        name = node->name;
-        left = node->left;
-        right = node->right;
-    }
-
     void show(){
         cout << "["<<val<<": "<<name<<"]"<<endl;
     }
