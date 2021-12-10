@@ -8,6 +8,7 @@
 
 // 算法测试案例
 #include "algorithm/sort/sortChecker.hpp" // 2.1 排序算法测试
+#include "algorithm/recursion/NQueens.hpp" // 2.3.1 N皇后算法
 #include "algorithm/special/kmp/kmp.hpp" // 2.5.1 kmp算法
 #include "algorithm/special/divideconquer/hannoiTower.hpp" // 2.5.2 汉诺塔
 
@@ -21,12 +22,13 @@ void hashTest();
 void treeTest();
 
 void sortTest();
+void NQueensTest();
 void kmpTest();
 void hannoiTowerTest();
 
 int main(){
     // TODO: testfunction
-    hannoiTowerTest();
+    NQueensTest();
     return 0;
 }
 
@@ -137,3 +139,13 @@ void hannoiTowerTest(){
     cout << "# here is the solution:\n";
     hannoiTowerSolution(num, 'L', 'M', 'R');
 }
+
+// 2.3.1 N皇后测试
+void NQueensTest(){
+    cout << "$ input number of Queens: ";
+    int num;
+    cin >> num;
+    cout << "# here are the solutions:\n";
+    NQueensSolution(num);
+}
+
