@@ -8,6 +8,7 @@
 
 // 算法测试案例
 #include "algorithm/sort/sortChecker.hpp" // 2.1 排序算法测试
+#include "algorithm/special/kmp/kmp.hpp" // 2.5.1 kmp算法
 
 using namespace std;
 
@@ -19,10 +20,11 @@ void hashTest();
 void treeTest();
 
 void sortTest();
+void kmpTest();
 
 int main(){
     // TODO: testfunction
-    treeTest();
+    kmpTest();
     return 0;
 }
 
@@ -105,4 +107,22 @@ void sortTest(){
         // 最大值，数组长度，测试次数
         checker.checkTest(400, 800, 10000);
     }
+}
+
+// 2.5.1 kmp算法测试
+void kmpTest(){
+    string sentence, word;
+    cout << "$ input a sentence :\n";
+    cin >> sentence;
+    cout << "$ input a word you want to find :\n";
+    cin >> word;
+    cout << "finding...\n";
+    int pos = kmpFind(sentence, word);
+    if(pos == -1){
+        cout <<"# not found!\n";
+        return;
+    }
+    cout << "# find in position [" << pos <<"]:\n";
+    cout <<"[" << sentence <<"]\n";
+    cout <<"["<<string(pos,'_')<<word<<string(sentence.size()-word.size()-pos,'_')<<"]\n";
 }
