@@ -1,4 +1,4 @@
-#include "graph.hpp"
+#include "graphAlgorithm.hpp"
 
 void GraphInterface(){
     vector<char> nodes = {'a','b','c','d','e','f','g'};
@@ -18,4 +18,10 @@ void GraphInterface(){
     listG.dfs();
     listG.bfs();
     GraphMatrix g2(listG);
+
+    PrimMst(graph);
+    KrusKalMst(graph);
+
+    PrimMst(listG);
+    KrusKalMst(listG);
 }

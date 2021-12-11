@@ -7,6 +7,7 @@ using namespace std;
 const int INF = 65535;
 
 class GraphList;
+class Edges;
 
 class GraphMatrix{
     vector<char> nodes; // 节点
@@ -130,6 +131,16 @@ public:
     vector<vector<int>>& getWeight(){
         return weights;
     }
+
+    int getNodesNum(){
+        return nodesNum;
+    }
+
+    int getEdgesNum(){
+        return edgsNum;
+    }
+
+    vector<Edges> generateEdges();
 };
 
 // 边节点
@@ -234,6 +245,14 @@ public:
         return nodes;
     }
 
+    int getNodesNum(){
+        return nodesNum;
+    }
+
+    int getEdgesNum(){
+        return edgesNum;
+    }
+
     void dfs(){
         vector<bool> isVisited(nodesNum);
         for(int i = 0; i < nodesNum; ++i){
@@ -253,6 +272,8 @@ public:
         }
         cout <<endl;
     }
+
+    vector<Edges> generateEdges();
 };
 
 GraphMatrix::GraphMatrix(GraphList &G){
@@ -275,4 +296,40 @@ GraphMatrix::GraphMatrix(GraphList &G){
         }
         ++count;
     }
+}
+
+class Edges{
+public:
+    int start;
+    int end;
+    int weight;
+    Edges(int i, int j, int w): start(i), end(j), weight(w){}
+};
+
+vector<Edges> GraphMatrix::generateEdges(){
+    vector<Edges> res;
+    for(int i = 0; i < nodesNum; ++i){
+        for(int j = i + 1; j < nodesNum; ++j){
+            if(weights[i][j] != INF){
+                Edges edg(i,j,weights[i][j]);
+                res.push_back(edg);
+            }
+        }
+    }
+    return res;
+}
+
+vector<Edges> GraphList::generateEdges(){
+    vector<Edges> res;
+    for(int i = 0; i < nodesNum; ++i){
+        auto edg = edges[i]->next;
+        while(edg){
+            if(edg->val > i){
+                Edges newEdg(i, edg->val, edg->weight);
+                res.push_back(newEdg);
+            }
+            edg = edg->next;
+        }
+    }
+    return res;
 }
