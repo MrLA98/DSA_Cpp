@@ -269,9 +269,9 @@ GraphMatrix::GraphMatrix(GraphList &G){
     for(auto it : G.getEdges()){
         auto Edg = it->next;
         while(Edg){
+            if(weights[Edg->val][count] != INF) ++edgsNum;
             weights[count][Edg->val] = Edg->weight;
             Edg = Edg->next;
-            ++edgsNum;
         }
         ++count;
     }
