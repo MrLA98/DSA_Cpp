@@ -13,9 +13,9 @@ void GraphInterface(){
     };
     GraphMatrix graph(nodes, weights);
     graph.dfs();
-    cout << endl;
     graph.bfs();
     GraphList listG(graph);
-
+    listG.dfs();
+    listG.bfs();
     GraphMatrix g2(listG);
 }

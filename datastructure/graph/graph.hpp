@@ -109,6 +109,7 @@ public:
                 dfs(i, isVisited);
             }
         }
+        cout <<endl;
     }
 
     // bfs
@@ -119,6 +120,7 @@ public:
                 bfs(i, isVisited);
             }
         }
+        cout <<endl;
     }
 
     vector<char>& getNoedes(){
@@ -173,6 +175,38 @@ class GraphList{
         }
     }
 
+    void dfs(int index, vector<bool>& isVisited){
+        cout << " [" << nodes[index] << "] ";
+        isVisited[index] = true;
+        auto nex = edges[index]->next;
+        while(nex){
+            if(!isVisited[nex->val]){
+                dfs(nex->val, isVisited);
+            }
+            nex = nex->next;
+        }
+    }
+
+    void bfs(int index, vector<bool>& isVisited){
+        cout << " [" << nodes[index] << "] ";
+        isVisited[index] = true;
+        deque<int> queue;
+        queue.push_back(index);
+        while(!queue.empty()){
+            index = queue.front();
+            queue.pop_front();
+            auto nex = edges[index]->next;
+            while(nex){
+                if(!isVisited[nex->val]){
+                    cout << " [" << nodes[nex->val] << "] ";
+                    queue.push_back(nex->val);
+                    isVisited[nex->val] = true;
+                }
+                nex = nex->next;
+            }
+        } 
+    }
+
 public:
     GraphList(GraphMatrix& G){
         nodes = G.getNoedes();
@@ -198,6 +232,26 @@ public:
 
     vector<char>& getNodes(){
         return nodes;
+    }
+
+    void dfs(){
+        vector<bool> isVisited(nodesNum);
+        for(int i = 0; i < nodesNum; ++i){
+            if(!isVisited[i]){
+                dfs(i, isVisited);
+            }
+        }
+        cout <<endl;
+    }
+
+    void bfs(){
+        vector<bool> isVisited(nodesNum);
+        for(int i = 0; i < nodesNum; ++i){
+            if(!isVisited[i]){
+                bfs(i, isVisited);
+            }
+        }
+        cout <<endl;
     }
 };
 
