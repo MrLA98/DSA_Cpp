@@ -5,6 +5,7 @@
 #include "datastructure/stack/stackCustomer.hpp" // 1.4 栈测试
 #include "datastructure/hash/hashCustomer.hpp" // 1.5 哈希表测试
 #include "datastructure/tree/treeTest.hpp" // 1.6 树测试
+#include "datastructure/graph/graphTest.hpp" // 1.7 图测试
 
 // 算法测试案例
 #include "algorithm/sort/sortChecker.hpp" // 2.1 排序算法测试
@@ -20,6 +21,7 @@ void listTest();
 void stackTest();
 void hashTest();
 void treeTest();
+void graphTest();
 
 void sortTest();
 void NQueensTest();
@@ -28,7 +30,7 @@ void hannoiTowerTest();
 
 int main(){
     // TODO: testfunction
-    NQueensTest();
+    graphTest();
     return 0;
 }
 
@@ -101,6 +103,11 @@ void treeTest(){
     cout<<"$ input number[0/1/2/3] to test: ";
     cin >> key;
     tCustomerInterface(key);
+}
+
+// 1.7 图测试
+void graphTest(){
+    GraphInterface();
 }
 
 // 2.1 排序算法测试
