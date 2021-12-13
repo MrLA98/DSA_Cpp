@@ -128,7 +128,7 @@ public:
         return nodes;
     }
 
-    vector<vector<int>>& getWeight(){
+    vector<vector<int>> getWeight(){
         return weights;
     }
 
@@ -274,6 +274,17 @@ public:
     }
 
     vector<Edges> generateEdges();
+
+    int getWeight(int i, int j){
+        auto it = edges[i]->next;
+        while(it){
+            if(it->val == j){
+                return it->weight;
+            }
+            it = it->next;
+        }
+        return INF;
+    }
 };
 
 GraphMatrix::GraphMatrix(GraphList &G){

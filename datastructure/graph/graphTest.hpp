@@ -19,9 +19,21 @@ void GraphInterface(){
     listG.bfs();
     GraphMatrix g2(listG);
 
+    cout << "# matrix test:\n";
+    cout << "# Prim:\n";
     PrimMst(graph);
+    cout << "# KrusKal:\n";
     KrusKalMst(graph);
+    cout << "# Dijkstra:\n";
+    Dijkstra(graph, 5);
+    cout << "# Floyd:\n";
+    Floyd(graph);
 
+    cout << "# list test:\n";
+    cout << "# Prim:\n";
     PrimMst(listG);
+    cout << "# KrusKal:\n";
     KrusKalMst(listG);
+    cout << "# Dijkstra:\n";
+    Dijkstra(listG, 5);
 }

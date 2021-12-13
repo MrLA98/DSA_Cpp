@@ -111,14 +111,93 @@ void KrusKalMst(GraphList G){
 }
 
 
-// Dijkstra -- 矩阵
+// 获得下一个中转节点
+int getNextTrans(vector<bool> &transNode, vector<int> &dis){
+    int min = INF, nex = -1;
+    for(int i = 0; i < dis.size(); ++i){
+        if(!transNode[i] && dis[i] < min){
+            min = dis[i];
+            nex = i;
+        }
+    }
+    transNode[nex] = true;
+    return nex;
+}
 
+// 展示矩阵
+void showArr(vector<int> &arr){
+    cout << "[" << arr[0];
+    for(int i = 1; i < arr.size(); ++i){
+        cout <<",\t"<< arr[i] ;
+    }
+    cout << "]\n";
+}
+
+// Dijkstra -- 矩阵
+void Dijkstra(GraphMatrix &G, int start){
+    vector<bool> transNode(G.getNodesNum(), false); // 是否做过中转节点
+    vector<int> dis(G.getNodesNum(), INF); // 到各点的距离
+    vector<int> pre(G.getNodesNum(), start); // 每个点的前驱
+    transNode[start] = true; // 先以给定的起点为中转点
+    dis[start] = 0; // 给定点到自己的距离为0
+    // 尝试以每个节点都为中转点
+    for(int i = 0; i < G.getEdgesNum(); ++i){
+        // 第0次是给定的起点作为中转点，其他的都是得到dis最小的点作为中转点
+        int nex = i == 0 ? start : getNextTrans(transNode, dis);
+        // 求中转点到每个点到距离
+        for(int j = 0; j < G.getNodesNum(); ++j){
+            // 起点到中转点距离 + 中转点到指定点距离
+            int len = dis[nex] + G.getWeight()[nex][j];
+            // 指定点没当过中转点，且得到的距离更小
+            if(!transNode[j] && len < dis[j]){
+                dis[j] = len; // 更新距离
+                pre[j] = nex; // 更新前驱节点
+            }
+        }
+    }
+    showArr(dis);
+    showArr(pre);
+}
 
 // Floyd -- 矩阵
-
+void Floyd(GraphMatrix &G){
+    vector<vector<int>> dis = G.getWeight();
+    for(int i = 0; i < G.getNodesNum(); ++i){
+        dis[i][i] = 0;
+    }
+    for(int k = 0; k < G.getNodesNum(); ++k){
+        for(int i = 0; i < G.getNodesNum(); ++i){
+            for(int j = i+1; j < G.getNodesNum(); ++j){
+                int len = dis[i][k] + dis[k][j];
+                dis[j][i] = dis[i][j] = len < dis[i][j] ? len : dis[i][j];
+            }
+        }
+    }
+    for(auto it : dis){
+        showArr(it);
+    }
+}
 
 // Dijkstra -- 链表
-
+void Dijkstra(GraphList &G, int start){
+    vector<bool> transNode(G.getNodesNum(), false);
+    vector<int> dis(G.getNodesNum(), INF);
+    vector<int> pre(G.getNodesNum(), start);
+    dis[start] = 0;
+    transNode[start] = true;
+    for(int i = 0; i < G.getNodesNum(); ++i){
+        int nex = i == 0 ? start : getNextTrans(transNode, dis);
+        for(int j = 0; j < G.getNodesNum(); ++j){
+            int len = dis[nex] + G.getWeight(nex, j);
+            if(!transNode[j] && len < dis[j]){
+                dis[j] = len;
+                pre[j] = nex;
+            }
+        }
+    }
+    showArr(dis);
+    showArr(pre);
+}
 
 // Floyd -- 链表
 
