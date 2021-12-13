@@ -32,7 +32,7 @@ void hannoiTowerTest();
 
 int main(){
     // TODO: testfunction
-    searchTest();
+    graphTest();
     return 0;
 }
 

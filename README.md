@@ -9,15 +9,16 @@ C++数据结构
 - hash
 - tree
 - graph
+  - dfs、bfs
+  - mst -- 最小生成树
+  - sr  -- 最短路径
 
 ## Algorithm
 - sort
 - search
 - recursion
-- graph
-  - mst -- 最小生成树
-  - sr  -- 最短路径
 - special
   - kmp
   - greedy
   - dynamic progra
+  - divide conquer

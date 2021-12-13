@@ -36,4 +36,6 @@ void GraphInterface(){
     KrusKalMst(listG);
     cout << "# Dijkstra:\n";
     Dijkstra(listG, 5);
+    cout << "# Floyd:\n";
+    Floyd(listG);
 }

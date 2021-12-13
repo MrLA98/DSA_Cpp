@@ -173,8 +173,8 @@ void Floyd(GraphMatrix &G){
             }
         }
     }
-    for(auto it : dis){
-        showArr(it);
+    for(auto row : dis){
+        showArr(row);
     }
 }
 
@@ -200,4 +200,34 @@ void Dijkstra(GraphList &G, int start){
 }
 
 // Floyd -- 链表
-
+void Floyd(GraphList &G){
+    int nodesNum = G.getNodesNum();
+    vector<vector<int>> dis(nodesNum, vector<int>(nodesNum));
+    for(int i = 0; i < nodesNum; ++i){
+        for(int j = 0; j < nodesNum; ++j){
+            dis[i][j] = i == j ? 0 : INF; 
+        }
+    }
+    int count = 0;
+    for(auto it : G.getEdges()){
+        auto nex = it->next;
+        while(nex){
+            if(nex->val > count){
+                dis[nex->val][count] = dis[count][nex->val] = nex->weight; 
+            }
+            nex = nex->next;
+        }
+        ++count;
+    }
+    for(int k = 0; k < nodesNum; ++k){
+        for(int i = 0; i < nodesNum; ++i){
+            for(int j = i+1; j < nodesNum; ++j){
+                int len = dis[i][k] + dis[k][j];
+                dis[i][j] = dis[j][i] = len < dis[i][j] ? len : dis[i][j];
+            }
+        }
+    }
+    for(auto row : dis){
+        showArr(row);
+    }
+}
