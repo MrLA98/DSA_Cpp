@@ -9,9 +9,10 @@
 
 // 算法测试案例
 #include "algorithm/sort/sortChecker.hpp" // 2.1 排序算法测试
+#include "algorithm/search/searchTest.hpp" // 2.2 查找算法测试
 #include "algorithm/recursion/NQueens.hpp" // 2.3.1 N皇后算法
-#include "algorithm/special/kmp/kmp.hpp" // 2.5.1 kmp算法
-#include "algorithm/special/divideconquer/hannoiTower.hpp" // 2.5.2 汉诺塔
+#include "algorithm/special/kmp/kmp.hpp" // 2.4.1 kmp算法
+#include "algorithm/special/divideconquer/hannoiTower.hpp" // 2.4.2 汉诺塔
 
 using namespace std;
 
@@ -24,13 +25,14 @@ void treeTest();
 void graphTest();
 
 void sortTest();
+void searchTest();
 void NQueensTest();
 void kmpTest();
 void hannoiTowerTest();
 
 int main(){
     // TODO: testfunction
-    graphTest();
+    searchTest();
     return 0;
 }
 
@@ -120,7 +122,21 @@ void sortTest(){
     }
 }
 
-// 2.5.1 kmp算法测试
+// 2.2 搜索算法测试
+void searchTest(){
+    searchTestCustomer();
+}
+
+// 2.3.1 N皇后测试
+void NQueensTest(){
+    cout << "$ input number of Queens: ";
+    int num;
+    cin >> num;
+    cout << "# here are the solutions:\n";
+    NQueensSolution(num);
+}
+
+// 2.4.1 kmp算法测试
 void kmpTest(){
     string sentence, word;
     cout << "$ input a sentence :\n";
@@ -138,21 +154,12 @@ void kmpTest(){
     cout <<"["<<string(pos,'_')<<word<<string(sentence.size()-word.size()-pos,'_')<<"]\n";
 }
 
-// 2.5.2 汉诺塔算法测试
+// 2.4.2 汉诺塔算法测试
 void hannoiTowerTest(){
     cout << "$ input number of HanniTower: ";
     int num;
     cin >> num;
     cout << "# here is the solution:\n";
     hannoiTowerSolution(num, 'L', 'M', 'R');
-}
-
-// 2.3.1 N皇后测试
-void NQueensTest(){
-    cout << "$ input number of Queens: ";
-    int num;
-    cin >> num;
-    cout << "# here are the solutions:\n";
-    NQueensSolution(num);
 }
 
