@@ -50,8 +50,9 @@ public:
     virtual void del(int key) = 0;
     virtual int len() = 0;
     virtual void show() = 0;
-    //virtual ~ListF() = 0;
+    virtual ~ListF() = 0;
 };
+ListF::~ListF(){}
 
 // 单链表
 class SingleListF : public ListF{

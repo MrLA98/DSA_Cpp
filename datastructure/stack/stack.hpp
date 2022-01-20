@@ -9,7 +9,9 @@ public:
     virtual int peek() = 0;
     virtual int size() = 0;
     virtual void show() = 0;
+    virtual ~StackF() = 0;
 };
+StackF::~StackF(){}
 
 // 数组栈
 class ArrayStack : public StackF{

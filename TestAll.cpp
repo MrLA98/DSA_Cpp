@@ -32,8 +32,8 @@ void hannoiTowerTest();
 
 int main(){
     // TODO: testfunction
-    searchTest();
-    system("pause");
+    queueTest();
+    //system("pause");
     return 0;
 }
 
